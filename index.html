@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Thiệp Mời Online</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+</head>
+<body>
+    <div class="container">
+       
+        <div class="card" id="card">
+            <div class="card-front">
+                <div class="card-content">
+                
+                    <div class="shin-c-container" id="shinCContainer">
+                        
+                        <img src="img/happy_d.png" alt="Shin C" class="shin-c-image" id="shinCImage">
+                        <p class="click-hint">Nhấn vào hình để tiếp tục</p>
+                    </div>
+                    
+                    <!-- Envelope section -->
+                    <div class="envelope-container" id="envelopeContainer" style="display: none;">
+                        <div class="envelope" id="envelope">
+                            <div class="envelope-body">
+
+                                <img src="img/happy_d.png" alt="Envelope" class="envelope-image">
+                                <!-- <div class="envelope-flowers">
+                                    <img src="img/bong_a.png" alt="Flower" class="envelope-flower envelope-flower-left">
+                                    <img src="img/hoa_c.png" alt="Flower" class="envelope-flower envelope-flower-right">
+                                </div> -->
+                            </div>
+                            <div class="envelope-flap" id="envelopeFlap">
+                                <div class="envelope-heart">❤️</div>
+                            </div>
+                            <p class="envelope-hint">Nhấn vào thiệp để mở</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-back">
+                <!-- Container cho hiệu ứng tuyết rơi -->
+                <div class="snow-container" id="snowContainer"></div>
+                
+                <div class="thiep-scroll-container" id="thiepScrollContainer">
+                    <!-- Thiep 1 - Background chính -->
+                    <div class="thiep-section thiep-section-1 active">
+                        <img src="img/thiep_1.png" alt="Thiệp 1" class="thiep-image">
+                    </div>
+                    
+                    <!-- Thiep 2 -->
+                    <div class="thiep-section thiep-section-2">
+                        <img src="img/thiep_2.png" alt="Thiệp 2" class="thiep-image">
+                    </div>
+                    
+                    <!-- Thiep 3 -->
+                    <div class="thiep-section thiep-section-3">
+                        <img src="img/thiep_3.png" alt="Thiệp 3" class="thiep-image">
+                    </div>
+                    
+                    <!-- Thiep 4 -->
+                    <div class="thiep-section thiep-section-4">
+                        <img src="img/thiep_4.png" alt="Thiệp 4" class="thiep-image">
+                    </div>
+                    
+                    <!-- Thiep 5 -->
+                    <div class="thiep-section thiep-section-5">
+                        <img src="img/thiep_5.png" alt="Thiệp 5" class="thiep-image">
+                    </div>
+                </div>
+                
+                <!-- Scroll indicator -->
+                <div class="scroll-indicator-thiep" id="scrollIndicatorThiep">
+                    <span>↓ Cuộn xuống để xem thêm</span>
+                </div>
+                
+                <!-- Nút đóng -->
+                <button class="close-btn" id="closeBtn">Ok đi luôn</button>
+                
+                <!-- Nút điều khiển nhạc -->
+       
+            </div>
+        </div>
+    </div>
+    
+    <!-- YouTube Player (ẩn) -->
+    <div id="youtube-player" style="display: none;"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
