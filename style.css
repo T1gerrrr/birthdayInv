@@ -373,6 +373,8 @@ body {
     justify-content: center;
     animation: fadeIn 0.5s ease-in;
     min-height: 400px;
+    padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .envelope {
@@ -388,7 +390,8 @@ body {
 .envelope-body {
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     height: 140px;
     background: linear-gradient(135deg, #fdd7d2 0%, #fff2f0 100%);
@@ -525,13 +528,13 @@ body {
 
 .envelope-flap {
     position: absolute;
-    top: 60px;
-    left: 0;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
     width: 100%;
     height: 80px;
     background: linear-gradient(135deg, #ffe4e9 0%, #ffeef5 100%);
     transform-origin: bottom center;
-    transform: translateY(0);
     transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), clip-path 0.8s ease;
     z-index: 3;
     box-shadow: 0 -5px 20px rgba(0.9, 0.9, 0.9, 0);
@@ -540,7 +543,7 @@ body {
 }
 
 .envelope-flap.opened {
-    transform: translateY(-80px) ;
+    transform: translateX(-50%) translateY(-80px);
     clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
     -webkit-clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
 }
@@ -1509,9 +1512,16 @@ body {
     .envelope {
         width: 220px;
         height: 160px;
+        margin: 0 auto;
     }
     
-    .envelope-body,
+    .envelope-body {
+        height: 110px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+    
     .envelope-flap {
         height: 110px;
     }
@@ -1652,9 +1662,16 @@ body {
     .envelope {
         width: 200px;
         height: 140px;
+        margin: 0 auto;
     }
     
-    .envelope-body,
+    .envelope-body {
+        height: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+    
     .envelope-flap {
         height: 100px;
     }
@@ -1756,9 +1773,16 @@ body {
     .envelope {
         width: 180px;
         height: 120px;
+        margin: 0 auto;
     }
     
-    .envelope-body,
+    .envelope-body {
+        height: 85px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+    }
+    
     .envelope-flap {
         height: 85px;
     }
