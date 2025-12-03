@@ -1,0 +1,99 @@
+═══════════════════════════════════════════════════════════════
+    DANH SÁCH LINK THIỆP MỜI - LANANH'S BIRTHDAY PARTY
+═══════════════════════════════════════════════════════════════
+
+Hướng dẫn: Copy link tương ứng và gửi cho từng khách mời
+
+═══════════════════════════════════════════════════════════════
+
+1. Duy Bts
+   Link: index.html?name=Duy%20Bts
+
+2. Loan iu dấu
+   Link: index.html?name=Loan%20iu%20d%E1%BA%A5u
+
+3. Hổ tiger
+   Link: index.html?name=H%E1%BB%95%20tiger
+
+4. Kelvin
+   Link: index.html?name=Kelvin
+
+5. Khoa
+   Link: index.html?name=Khoa
+
+6. Em Dịu xây dựng
+   Link: index.html?name=Em%20D%E1%BB%8Bu%20x%C3%A2y%20d%E1%BB%B1ng
+
+7. Em Siu
+   Link: index.html?name=Em%20Siu
+
+8. Khoa Văn
+   Link: index.html?name=Khoa%20V%C4%83n
+
+9. Hân iu của a
+   Link: index.html?name=H%C3%A2n%20iu%20c%E1%BB%A7a%20a
+
+10. Mai Thi
+    Link: index.html?name=Mai%20Thi
+
+11. Vk iu Donna
+    Link: index.html?name=Vk%20iu%20Donna
+
+12. Con Linh láo l
+    Link: index.html?name=Con%20Linh%20l%C3%A1o%20l
+
+13. Hằng
+    Link: index.html?name=H%E1%BA%B1ng
+
+14. Chaien xáu tínk
+    Link: index.html?name=Chaien%20x%C3%A1u%20t%C3%ADnk
+
+15. Em Xuân 62
+    Link: index.html?name=Em%20Xu%C3%A2n%2062
+
+16. Em Vân mỏ hỗn
+    Link: index.html?name=Em%20V%C3%A2n%20m%E1%BB%8F%20h%E1%BB%97n
+
+17. A Thắng 77c1
+    Link: index.html?name=A%20Th%E1%BA%AFng%2077c1
+
+18. Lộc sì nắc🐍
+    Link: index.html?name=L%E1%BB%99c%20s%C3%AC%20n%E1%BA%AFc%F0%9F%90%8D
+
+19. Đỉ màng tang
+    Link: index.html?name=%C4%90%E1%BB%89%20m%C3%A0ng%20tang
+
+20. Thúy heo của tui
+    Link: index.html?name=Th%C3%BAy%20heo%20c%E1%BB%A7a%20tui
+
+21. Em Vi dép lú
+    Link: index.html?name=Em%20Vi%20d%C3%A9p%20l%C3%BA
+
+22. Hùng
+    Link: index.html?name=H%C3%B9ng
+
+23. Huy baby
+    Link: index.html?name=Huy%20baby
+
+24. Chế Trường
+    Link: index.html?name=Ch%E1%BA%BF%20Tr%C6%B0%E1%BB%9Dng
+
+25. Đạt
+    Link: index.html?name=%C4%90%E1%BA%A1t
+
+26. 3 chê của má
+    Link: index.html?name=3%20ch%C3%AA%20c%E1%BB%A7a%20m%C3%A1
+
+27. Nhung Jollibee
+    Link: index.html?name=Nhung%20Jollibee
+
+═══════════════════════════════════════════════════════════════
+
+LƯU Ý:
+- Thay thế "index.html" bằng URL đầy đủ của website nếu cần
+- Ví dụ: https://yourdomain.com/index.html?name=Duy%20Bts
+- Các ký tự đặc biệt và dấu đã được encode trong URL
+- Copy toàn bộ link (bao gồm phần ?name=...) để gửi cho khách mời
+
+═══════════════════════════════════════════════════════════════
+

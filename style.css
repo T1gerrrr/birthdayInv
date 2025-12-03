@@ -422,6 +422,34 @@ body {
     justify-content: center;
 }
 
+.envelope-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #5a3d5c;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 10;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(8px);
+    white-space: nowrap;
+    max-width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0;
+    transition: opacity 0.5s ease-in 0.5s;
+    border: 2px solid rgba(255, 107, 157, 0.3);
+}
+
+.envelope-container.opened .envelope-name {
+    opacity: 1;
+}
+
 .envelope-image {
     max-width: 170%;
     height: 100%;
@@ -593,6 +621,68 @@ body {
     justify-content: center;
     animation: fadeIn 0.5s ease-in;
     background: transparent;
+    position: relative;
+}
+
+/* Tên khách mời bên ngoài thiệp */
+.guest-name-outside {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #5a3d5c;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 100;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 2px solid rgba(255, 107, 157, 0.4);
+    display: none;
+    animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Tên khách mời bên trong thiệp */
+.guest-name-inside {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #5a3d5c;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 100;
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border: 2px solid rgba(255, 107, 157, 0.4);
+    display: none;
+    animation: fadeInDown 0.8s ease-out 0.3s both;
 }
 
 .shin-c-image {
@@ -1531,6 +1621,26 @@ body {
         font-size: 12px;
     }
     
+    .envelope-name {
+        font-size: 16px;
+        padding: 8px 15px;
+        max-width: 80%;
+    }
+    
+    .guest-name-outside {
+        font-size: 20px;
+        padding: 10px 20px;
+        top: 15px;
+        max-width: 85%;
+    }
+    
+    .guest-name-inside {
+        font-size: 18px;
+        padding: 10px 20px;
+        top: 15px;
+        max-width: 85%;
+    }
+    
     /* Nút nhạc mobile */
     .music-btn {
         width: 45px;
@@ -1679,6 +1789,26 @@ body {
     .envelope-hint {
         margin-top: 160px;
         font-size: 11px;
+    }
+    
+    .envelope-name {
+        font-size: 14px;
+        padding: 6px 12px;
+        max-width: 75%;
+    }
+    
+    .guest-name-outside {
+        font-size: 18px;
+        padding: 8px 16px;
+        top: 10px;
+        max-width: 80%;
+    }
+    
+    .guest-name-inside {
+        font-size: 16px;
+        padding: 8px 16px;
+        top: 10px;
+        max-width: 80%;
     }
     
     /* Shin C mobile nhỏ */

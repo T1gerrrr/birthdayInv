@@ -191,7 +191,49 @@ function toggleMusic() {
     }
 }
 
+// Hàm lấy tên từ URL parameter
+function getGuestName() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    return name ? decodeURIComponent(name) : '';
+}
+
+// Hàm hiển thị tên trong envelope
+function displayGuestName() {
+    const name = getGuestName();
+    const envelopeName = document.getElementById('envelopeName');
+    const guestNameOutside = document.getElementById('guestNameOutside');
+    const guestNameInside = document.getElementById('guestNameInside');
+    
+    if (name) {
+        // Hiển thị tên trong envelope
+        if (envelopeName) {
+            envelopeName.textContent = name;
+        }
+        
+        // Hiển thị tên bên ngoài thiệp
+        if (guestNameOutside) {
+            guestNameOutside.textContent = name;
+            guestNameOutside.style.display = 'block';
+        }
+        
+        // Hiển thị tên bên trong thiệp
+        if (guestNameInside) {
+            guestNameInside.textContent = name;
+            guestNameInside.style.display = 'block';
+        }
+    } else {
+        // Nếu không có tên, ẩn các phần tử
+        if (envelopeName) envelopeName.style.display = 'none';
+        if (guestNameOutside) guestNameOutside.style.display = 'none';
+        if (guestNameInside) guestNameInside.style.display = 'none';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Hiển thị tên khách mời
+    displayGuestName();
+    
     const card = document.getElementById('card');
     const closeBtn = document.getElementById('closeBtn');
     const shinCImage = document.getElementById('shinCImage');
