@@ -579,7 +579,7 @@ body {
 .envelope-heart {
     position: absolute;
     top: 10px;
-    left: 50%;
+    left: 47%;
     transform: translateX(-50%);
     font-size: 20px;
     animation: heartbeat 3.5s ease-in-out infinite;
