@@ -1266,6 +1266,7 @@ body {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    margin-left: -80px;
 }
 
 .close-btn:hover {
@@ -1275,6 +1276,512 @@ body {
 
 .close-btn:active {
     transform: translateY(-1px);
+}
+
+/* Nút từ chối */
+.reject-btn {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    z-index: 200;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 100px;
+}
+
+.reject-btn:hover {
+    transform: translateX(-50%) translateY(-3px);
+    box-shadow: 0 8px 20px rgba(220, 53, 69, 0.6);
+}
+
+.reject-btn:active {
+    transform: translateX(-50%) translateY(-1px);
+}
+
+/* Container cho form gửi lời chúc */
+.wish-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 20000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.wish-content {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    border: 3px solid rgba(255, 107, 157, 0.3);
+}
+
+.wish-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 107, 157, 0.2);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    font-size: 24px;
+    color: #ff6b9d;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+.wish-close-btn:hover {
+    background: rgba(255, 107, 157, 0.4);
+    transform: rotate(90deg);
+}
+
+.wish-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #ff6b9d;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "Imperial Script", cursive;
+    letter-spacing: 2px;
+}
+
+.wish-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.wish-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 15px;
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    resize: vertical;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.wish-textarea:focus {
+    outline: none;
+    border-color: #ff6b9d;
+    box-shadow: 0 0 10px rgba(255, 107, 157, 0.2);
+}
+
+.wish-info {
+    display: flex;
+    gap: 10px;
+}
+
+.wish-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid rgba(255, 107, 157, 0.3);
+    border-radius: 15px;
+    font-size: 16px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.wish-input:focus {
+    outline: none;
+    border-color: #ff6b9d;
+    box-shadow: 0 0 10px rgba(255, 107, 157, 0.2);
+}
+
+.wish-submit-btn {
+    background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 107, 157, 0.4);
+    transition: all 0.3s ease;
+}
+
+.wish-submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 157, 0.6);
+}
+
+.wish-submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.wish-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.wish-success {
+    text-align: center;
+    padding: 20px;
+    background: rgba(76, 175, 80, 0.1);
+    border-radius: 15px;
+    margin-top: 15px;
+    animation: fadeIn 0.5s ease;
+}
+
+.wish-success p {
+    color: #4caf50;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Container cho hiệu ứng từ chối */
+.reject-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.9); */
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.reject-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Đấm - Meme 1 */
+.reject-fist {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 10001;
+    animation: fistPunch 1.5s ease-out;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8));
+}
+
+@keyframes fistPunch {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) translateX(-200px);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2) translateX(0);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) translateX(0);
+    }
+}
+
+/* Con dao */
+.cay-dao-image {
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 10001;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: daoAppear 1s ease-out;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8));
+}
+
+/* Ngón tay giữa - Meme 3 */
+.reject-finger {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 10002;
+    animation: fingerAppear 1s ease-out;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.9));
+}
+
+/* Meme 4 */
+.reject-meme4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 10002;
+    animation: memeAppear 1s ease-out;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.9));
+}
+
+/* Meme 5 */
+.reject-meme5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 10002;
+    animation: memeAppear 1s ease-out;
+    filter: drop-shadow(0 0 30px rgba(255, 0, 0, 0.9));
+}
+
+@keyframes memeAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(-90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+@keyframes fingerAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3) rotate(-90deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+/* Text từ chối */
+.reject-text {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 72px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 
+        0 0 10px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 0, 0, 0.4),
+        3px 3px 0px rgba(0, 0, 0, 0.8);
+    z-index: 10003;
+    font-family: "Arial", sans-serif;
+    letter-spacing: 2px;
+    animation: textAppear 1s ease-out, textShake 0.5s ease-in-out 1s infinite;
+    white-space: nowrap;
+}
+
+@keyframes textAppear {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px) scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+    }
+}
+
+@keyframes textShake {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    25% {
+        transform: translateX(-50%) translateY(-3px) rotate(-1deg);
+    }
+    75% {
+        transform: translateX(-50%) translateY(3px) rotate(1deg);
+    }
+}
+
+.cay-dao-image {
+    max-width: 80%;
+    max-height: 80vh;
+    object-fit: contain;
+    z-index: 10001;
+    animation: daoAppear 0.5s ease-out;
+    filter: drop-shadow(0 0 20px rgba(255, 0, 0, 0.8));
+}
+
+@keyframes daoAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5) rotate(-180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+}
+
+/* Container cho hiệu ứng cảm ơn */
+.thank-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 182, 193, 0.95);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.thank-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.thank-heart {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: contain;
+    z-index: 10001;
+    animation: heartBeat 1s ease-out, heartPulse 1s ease-in-out 1s infinite;
+    filter: drop-shadow(0 0 30px rgba(255, 20, 147, 0.8));
+}
+
+@keyframes heartBeat {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes heartPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.thank-text {
+    margin-top: 30px;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 
+        0 0 10px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 0, 0, 0.4);
+    z-index: 10002;
+    font-family: "Arial", sans-serif;
+    letter-spacing: 3px;
+    animation: textFadeIn 1s ease-out 0.5s both;
+}
+
+@keyframes textFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hiệu ứng máu phun */
+.blood-splatter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10002;
+    overflow: hidden;
+}
+
+.blood-drop {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #dc3545;
+    border-radius: 50% 0 50% 50%;
+    animation: bloodSplatter 1.5s ease-out forwards;
+    box-shadow: 0 0 10px rgba(220, 53, 69, 0.8);
+}
+
+.blood-drop::before {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #8b0000;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes bloodSplatter {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--splash-x), var(--splash-y)) scale(0.3);
+    }
 }
 
 /* Nút điều khiển nhạc */
@@ -1678,6 +2185,26 @@ body {
         bottom: 15px;
     }
     
+    /* Text từ chối mobile */
+    .reject-text {
+        font-size: 48px;
+        top: 10%;
+        letter-spacing: 3px;
+    }
+    
+    .cay-dao-image {
+        max-width: 90%;
+        max-height: 70vh;
+    }
+    
+    .reject-fist,
+    .reject-finger,
+    .reject-meme4,
+    .reject-meme5 {
+        max-width: 90%;
+        max-height: 70vh;
+    }
+    
     /* Tuyết mobile - giảm số lượng */
     .snowflake.small {
         font-size: 0.6em;
@@ -1777,6 +2304,14 @@ body {
         padding: 8px 18px;
         font-size: 13px;
         bottom: 10px;
+        margin-left: -50px;
+    }
+    
+    .reject-btn {
+        padding: 8px 18px;
+        font-size: 13px;
+        bottom: 10px;
+        margin-left: 50px;
     }
     
     /* Scroll indicator mobile nhỏ */
@@ -1910,6 +2445,54 @@ body {
         padding: 6px 14px;
         font-size: 12px;
         bottom: 8px;
+        margin-left: -40px;
+    }
+    
+    .reject-btn {
+        padding: 6px 14px;
+        font-size: 12px;
+        bottom: 8px;
+        margin-left: 40px;
+    }
+    
+    /* Text từ chối mobile nhỏ */
+    .reject-text {
+        font-size: 36px;
+        top: 8%;
+        letter-spacing: 2px;
+    }
+    
+    .reject-fist {
+        max-width: 95%;
+        max-height: 65vh;
+    }
+    
+    .reject-finger {
+        max-width: 95%;
+        max-height: 65vh;
+    }
+    
+    .reject-meme4,
+    .reject-meme5 {
+        max-width: 95%;
+        max-height: 65vh;
+    }
+    
+    .cay-dao-image {
+        max-width: 95%;
+        max-height: 65vh;
+    }
+    
+    /* Hiệu ứng cảm ơn mobile nhỏ */
+    .thank-heart {
+        max-width: 150px;
+        max-height: 150px;
+    }
+    
+    .thank-text {
+        font-size: 28px;
+        margin-top: 15px;
+        letter-spacing: 1px;
     }
     
     .scroll-indicator-thiep {
@@ -1967,6 +2550,30 @@ body {
     
     .close-btn {
         min-height: 44px;
+    }
+    
+    /* Form gửi lời chúc mobile */
+    .wish-content {
+        padding: 20px;
+        max-width: 95%;
+    }
+    
+    .wish-title {
+        font-size: 24px;
+    }
+    
+    .wish-textarea {
+        min-height: 120px;
+        font-size: 14px;
+    }
+    
+    .wish-input {
+        font-size: 14px;
+    }
+    
+    .wish-submit-btn {
+        padding: 12px 25px;
+        font-size: 16px;
     }
 }
 

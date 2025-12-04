@@ -99,14 +99,72 @@
                 <!-- Nút đóng -->
                 <button class="close-btn" id="closeBtn">Ok đi luôn</button>
                 
+                <!-- Nút từ chối -->
+                <button class="reject-btn" id="rejectBtn">Từ chối</button>
+                
                 <!-- Nút điều khiển nhạc -->
        
             </div>
         </div>
     </div>
     
+    <!-- Container cho hiệu ứng từ chối -->
+    <div class="reject-container" id="rejectContainer" style="display: none;">
+        <div class="reject-content">
+            <img src="img/meme_1.jpg" alt="Meme 1" class="reject-fist" id="rejectFist">
+            <img src="img/meme_2.jpg" alt="Cây đao" class="cay-dao-image" id="cayDaoImage" style="display: none;">
+            <img src="img/meme_3.jpg" alt="Meme 3" class="reject-finger" id="rejectFinger" style="display: none;">
+            <img src="img/meme_4.jpg" alt="Meme 4" class="reject-meme4" id="rejectMeme4" style="display: none;">
+            <img src="img/meme_5.jpg" alt="Meme 5" class="reject-meme5" id="rejectMeme5" style="display: none;">
+            <div class="reject-text" id="rejectText" style="display: none;">Đỉ mẹ m nha =)))</div>
+            <div class="blood-splatter" id="bloodSplatter"></div>
+        </div>
+    </div>
+    
+    <!-- Container cho hiệu ứng cảm ơn -->
+    <div class="thank-container" id="thankContainer" style="display: none;">
+        <div class="thank-content">
+            <img src="img/happy_d.png" alt="Trái tim" class="thank-heart" id="thankHeart">
+            <div class="thank-text" id="thankText">Củm ơn babi nha</div>
+        </div>
+    </div>
+    
     <!-- YouTube Player (ẩn) -->
     <div id="youtube-player" style="display: none;"></div>
+    
+    <!-- Form gửi lời chúc -->
+    <div class="wish-container" id="wishContainer" style="display: none;">
+        <div class="wish-content">
+            <button class="wish-close-btn" id="wishCloseBtn">×</button>
+            <h2 class="wish-title">Gửi lời chúc của bạn</h2>
+            <form id="wishForm" class="wish-form">
+                <textarea 
+                    id="wishMessage" 
+                    class="wish-textarea" 
+                    placeholder="Nhập lời chúc của bạn..."
+                    required
+                ></textarea>
+                <div class="wish-info">
+                    <input 
+                        type="text" 
+                        id="wishName" 
+                        class="wish-input" 
+                        placeholder="Tên của bạn (tùy chọn)"
+                    >
+                </div>
+                <button type="submit" class="wish-submit-btn" id="wishSubmitBtn">
+                    Gửi lời chúc
+                </button>
+            </form>
+            <div class="wish-success" id="wishSuccess" style="display: none;">
+                <p>✓ Cảm ơn bạn đã gửi lời chúc!</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     
     <script src="script.js"></script>
 </body>

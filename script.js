@@ -1,3 +1,70 @@
+// Firebase Config
+const firebaseConfig = {
+    apiKey: "AIzaSyDlK6wJrOHVMYK1rHad2PiSj-X-GJYZjEI",
+    authDomain: "birthdayinvi-cc08f.firebaseapp.com",
+    databaseURL: "https://birthdayinvi-cc08f-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "birthdayinvi-cc08f",
+    storageBucket: "birthdayinvi-cc08f.firebasestorage.app",
+    messagingSenderId: "111670688222",
+    appId: "1:111670688222:web:89a90a8f2a2d9c0465054f",
+    measurementId: "G-LPY8B5FY1B"
+};
+
+// Khởi tạo Firebase
+let database = null;
+
+// Đợi Firebase SDK load xong
+function initializeFirebase() {
+    if (typeof firebase !== 'undefined') {
+        try {
+            // Kiểm tra xem app đã được khởi tạo chưa
+            let app;
+            try {
+                app = firebase.app();
+                console.log('Firebase app đã tồn tại, sử dụng app hiện có');
+            } catch (e) {
+                // App chưa tồn tại, khởi tạo mới
+                app = firebase.initializeApp(firebaseConfig);
+                console.log('Firebase app đã được khởi tạo mới');
+            }
+            
+            // Khởi tạo database
+            database = firebase.database(app);
+            
+            // Test connection
+            database.ref('.info/connected').once('value')
+                .then(() => {
+                    console.log('Firebase Realtime Database đã kết nối thành công');
+                })
+                .catch((error) => {
+                    console.error('Lỗi kết nối Firebase Database:', error);
+                    console.log('Vui lòng kiểm tra:');
+                    console.log('1. Realtime Database đã được tạo trong Firebase Console chưa?');
+                    console.log('2. Database URL có đúng không?');
+                    console.log('3. Rules có cho phép truy cập không?');
+                });
+        } catch (error) {
+            console.error('Lỗi khởi tạo Firebase:', error);
+            if (error.code === 'app/duplicate-app') {
+                // App đã tồn tại, lấy app hiện có
+                const app = firebase.app();
+                database = firebase.database(app);
+                console.log('Sử dụng Firebase app đã tồn tại');
+            }
+        }
+    } else {
+        // Nếu chưa có, thử lại sau 100ms
+        setTimeout(initializeFirebase, 100);
+    }
+}
+
+// Khởi tạo khi DOM ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeFirebase);
+} else {
+    initializeFirebase();
+}
+
 // YouTube Player
 let youtubePlayer = null;
 let isMusicPlaying = false;
@@ -248,9 +315,15 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const card = document.getElementById('card');
     const closeBtn = document.getElementById('closeBtn');
+    const rejectBtn = document.getElementById('rejectBtn');
     const shinCImage = document.getElementById('shinCImage');
     const shinCContainer = document.getElementById('shinCContainer');
     const musicBtn = document.getElementById('musicBtn');
+    const wishContainer = document.getElementById('wishContainer');
+    const wishCloseBtn = document.getElementById('wishCloseBtn');
+    const wishForm = document.getElementById('wishForm');
+    const wishSubmitBtn = document.getElementById('wishSubmitBtn');
+    const wishSuccess = document.getElementById('wishSuccess');
 
     // Xử lý click vào hình shin_c
     shinCImage.addEventListener('click', function() {
@@ -264,8 +337,17 @@ document.addEventListener('DOMContentLoaded', function() {
         envelopeContainer.style.display = 'flex';
     });
 
-    // Xử lý nút đóng thiệp
+    // Xử lý nút đóng thiệp - mở form gửi lời chúc
     closeBtn.addEventListener('click', function() {
+        // Mở form gửi lời chúc
+        if (wishContainer) {
+            wishContainer.style.display = 'flex';
+        }
+    });
+    
+    // Hàm đóng thiệp và reset
+    function closeCardAndReset() {
+        // Đóng thiệp
         card.classList.remove('opened');
         
         // Dừng hiệu ứng tuyết rơi
@@ -308,13 +390,25 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Hiện lại hình shin_c
         shinCContainer.style.display = 'flex';
+    }
+
+    // Hàm hiển thị hiệu ứng cảm ơn
+    function showThankEffect() {
+        const thankContainer = document.getElementById('thankContainer');
+        const thankHeart = document.getElementById('thankHeart');
+        const thankText = document.getElementById('thankText');
         
-        // Thêm hiệu ứng khi đóng
-        closeBtn.style.transform = 'scale(0.95)';
+        if (!thankContainer) return;
+        
+        // Hiển thị container cảm ơn
+        thankContainer.style.display = 'flex';
+        
+        // Sau 3 giây, đóng thiệp và reset
         setTimeout(() => {
-            closeBtn.style.transform = 'scale(1)';
-        }, 200);
-    });
+            thankContainer.style.display = 'none';
+            closeCardAndReset();
+        }, 3000);
+    }
 
     // Xử lý scroll indicator cho story
     const storyScroll = document.getElementById('storyScroll');
@@ -487,6 +581,250 @@ document.addEventListener('DOMContentLoaded', function() {
         musicBtn.addEventListener('click', function() {
             toggleMusic();
         });
+    }
+
+    // Xử lý form gửi lời chúc
+    // Thêm nút mở form vào nút đóng thiệp
+    if (closeBtn) {
+        const originalCloseHandler = closeBtn.onclick;
+        closeBtn.addEventListener('click', function(e) {
+            // Mở form gửi lời chúc trước khi đóng thiệp
+            if (wishContainer) {
+                wishContainer.style.display = 'flex';
+            }
+        });
+    }
+
+    // Đóng form gửi lời chúc
+    if (wishCloseBtn) {
+        wishCloseBtn.addEventListener('click', function() {
+            if (wishContainer) {
+                wishContainer.style.display = 'none';
+                wishForm.reset();
+                wishSuccess.style.display = 'none';
+            }
+        });
+    }
+
+    // Xử lý submit form
+    if (wishForm) {
+        wishForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const wishMessage = document.getElementById('wishMessage').value.trim();
+            const wishName = document.getElementById('wishName').value.trim();
+            
+            if (!wishMessage) {
+                alert('Vui lòng nhập lời chúc!');
+                return;
+            }
+
+            // Disable nút submit
+            if (wishSubmitBtn) {
+                wishSubmitBtn.disabled = true;
+                wishSubmitBtn.textContent = 'Đang gửi...';
+            }
+
+            // Lấy tên khách mời từ URL
+            const guestName = getGuestName() || 'Khách';
+
+            // Tạo dữ liệu để lưu
+            const wishData = {
+                message: wishMessage,
+                name: wishName || 'Ẩn danh',
+                guestName: guestName,
+                timestamp: firebase.database.ServerValue.TIMESTAMP,
+                date: new Date().toISOString()
+            };
+
+            // Kiểm tra Firebase đã sẵn sàng chưa
+            if (!database) {
+                // Nếu chưa có, thử khởi tạo lại
+                if (typeof firebase !== 'undefined') {
+                    try {
+                        firebase.initializeApp(firebaseConfig);
+                        database = firebase.database();
+                    } catch (error) {
+                        console.error('Lỗi khởi tạo Firebase:', error);
+                        alert('Lỗi kết nối Firebase. Vui lòng kiểm tra cấu hình!');
+                        if (wishSubmitBtn) {
+                            wishSubmitBtn.disabled = false;
+                            wishSubmitBtn.textContent = 'Gửi lời chúc';
+                        }
+                        return;
+                    }
+                } else {
+                    alert('Firebase SDK chưa được tải. Vui lòng tải lại trang!');
+                    if (wishSubmitBtn) {
+                        wishSubmitBtn.disabled = false;
+                        wishSubmitBtn.textContent = 'Gửi lời chúc';
+                    }
+                    return;
+                }
+            }
+
+            // Kiểm tra database có sẵn sàng không
+            if (!database) {
+                alert('Database chưa sẵn sàng. Vui lòng thử lại!');
+                if (wishSubmitBtn) {
+                    wishSubmitBtn.disabled = false;
+                    wishSubmitBtn.textContent = 'Gửi lời chúc';
+                }
+                return;
+            }
+
+            // Lưu vào Firebase Realtime Database
+            const wishesRef = database.ref('wishes');
+            wishesRef.push(wishData)
+                .then(() => {
+                    // Thành công
+                    wishSuccess.style.display = 'block';
+                    wishForm.reset();
+                    
+                    // Ẩn form sau 2 giây và hiện hiệu ứng cảm ơn
+                    setTimeout(() => {
+                        wishContainer.style.display = 'none';
+                        wishSuccess.style.display = 'none';
+                        
+                        // Hiển thị hiệu ứng cảm ơn
+                        showThankEffect();
+                    }, 2000);
+                })
+                .catch((error) => {
+                    console.error('Lỗi khi gửi lời chúc:', error);
+                    let errorMessage = 'Có lỗi xảy ra khi gửi lời chúc. ';
+                    
+                    if (error.code === 'PERMISSION_DENIED') {
+                        errorMessage += 'Lỗi: Không có quyền ghi dữ liệu. Vui lòng kiểm tra Firebase Rules!';
+                    } else if (error.code === 'UNAVAILABLE') {
+                        errorMessage += 'Lỗi: Database không khả dụng. Vui lòng kiểm tra Firebase Console!';
+                    } else {
+                        errorMessage += 'Chi tiết: ' + error.message;
+                    }
+                    
+                    alert(errorMessage);
+                })
+                .finally(() => {
+                    // Enable lại nút submit
+                    if (wishSubmitBtn) {
+                        wishSubmitBtn.disabled = false;
+                        wishSubmitBtn.textContent = 'Gửi lời chúc';
+                    }
+                });
+        });
+    }
+
+    // Xử lý nút từ chối
+    if (rejectBtn) {
+        rejectBtn.addEventListener('click', function() {
+            showRejectEffect();
+        });
+    }
+
+    // Hàm hiển thị hiệu ứng từ chối
+    function showRejectEffect() {
+        const rejectContainer = document.getElementById('rejectContainer');
+        const rejectFist = document.getElementById('rejectFist');
+        const cayDaoImage = document.getElementById('cayDaoImage');
+        const rejectFinger = document.getElementById('rejectFinger');
+        const rejectMeme4 = document.getElementById('rejectMeme4');
+        const rejectMeme5 = document.getElementById('rejectMeme5');
+        const rejectText = document.getElementById('rejectText');
+        const bloodSplatter = document.getElementById('bloodSplatter');
+        
+        if (!rejectContainer) return;
+        
+        // Reset tất cả về trạng thái ban đầu
+        if (rejectFist) rejectFist.style.display = 'block';
+        if (cayDaoImage) cayDaoImage.style.display = 'none';
+        if (rejectFinger) rejectFinger.style.display = 'none';
+        if (rejectMeme4) rejectMeme4.style.display = 'none';
+        if (rejectMeme5) rejectMeme5.style.display = 'none';
+        if (rejectText) rejectText.style.display = 'none';
+        if (bloodSplatter) bloodSplatter.innerHTML = '';
+        
+        // Hiển thị container
+        rejectContainer.style.display = 'flex';
+        
+        // Bước 1: Hiện meme_1 (0s)
+        // Đã hiện với animation
+        
+        // Bước 2: Ẩn meme_1, hiện meme_2 (sau 1s)
+        setTimeout(() => {
+            if (rejectFist) rejectFist.style.display = 'none';
+            if (cayDaoImage) {
+                cayDaoImage.style.display = 'block';
+                // Tạo máu phun khi meme_2 xuất hiện
+                if (bloodSplatter) createBloodSplatter(bloodSplatter);
+            }
+        }, 1000);
+        
+        // Bước 3: Ẩn meme_2, hiện meme_3 (sau 2s)
+        setTimeout(() => {
+            if (cayDaoImage) cayDaoImage.style.display = 'none';
+            if (rejectFinger) rejectFinger.style.display = 'block';
+        }, 2000);
+        
+        // Bước 4: Ẩn meme_3, hiện meme_4 (sau 3s)
+        setTimeout(() => {
+            if (rejectFinger) rejectFinger.style.display = 'none';
+            if (rejectMeme4) rejectMeme4.style.display = 'block';
+        }, 3000);
+        
+        // Bước 5: Ẩn meme_4, hiện meme_5 (sau 4s)
+        setTimeout(() => {
+            if (rejectMeme4) rejectMeme4.style.display = 'none';
+            if (rejectMeme5) rejectMeme5.style.display = 'block';
+        }, 4000);
+        
+        // Bước 6: Hiện chữ (sau 5s)
+        setTimeout(() => {
+            if (rejectText) rejectText.style.display = 'block';
+        }, 5000);
+        
+        // Tự động đóng sau 8 giây
+        setTimeout(() => {
+            rejectContainer.style.display = 'none';
+            if (bloodSplatter) bloodSplatter.innerHTML = '';
+            // Reset lại
+            if (rejectFist) rejectFist.style.display = 'block';
+            if (cayDaoImage) cayDaoImage.style.display = 'none';
+            if (rejectFinger) rejectFinger.style.display = 'none';
+            if (rejectMeme4) rejectMeme4.style.display = 'none';
+            if (rejectMeme5) rejectMeme5.style.display = 'none';
+            if (rejectText) rejectText.style.display = 'none';
+        }, 8000);
+    }
+
+    // Hàm tạo hiệu ứng máu phun
+    function createBloodSplatter(container) {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const numDrops = 50; // Số lượng giọt máu
+        
+        for (let i = 0; i < numDrops; i++) {
+            const drop = document.createElement('div');
+            drop.className = 'blood-drop';
+            
+            // Tính toán góc và khoảng cách ngẫu nhiên
+            const angle = (Math.PI * 2 * i) / numDrops + Math.random() * 0.5;
+            const distance = 200 + Math.random() * 300;
+            const x = Math.cos(angle) * distance;
+            const y = Math.sin(angle) * distance;
+            
+            drop.style.left = centerX + 'px';
+            drop.style.top = centerY + 'px';
+            drop.style.setProperty('--splash-x', x + 'px');
+            drop.style.setProperty('--splash-y', y + 'px');
+            drop.style.animationDelay = (Math.random() * 0.3) + 's';
+            
+            // Kích thước ngẫu nhiên
+            const size = 6 + Math.random() * 8;
+            drop.style.width = size + 'px';
+            drop.style.height = size + 'px';
+            
+            container.appendChild(drop);
+        }
     }
 
     // Hàm tạo hiệu ứng tuyết rơi
