@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Lời Chúc</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .admin-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .password-form {
+            margin-bottom: 30px;
+        }
+
+        .password-input-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .password-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .password-submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .password-submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .password-error {
+            color: #dc3545;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        .wishes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .wishes-count {
+            font-size: 18px;
+            color: #666;
+        }
+
+        .refresh-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .wishes-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .wish-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .wish-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .wish-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .wish-name {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 18px;
+        }
+
+        .wish-guest {
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .wish-message {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+
+        .wish-date {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #667eea;
+        }
+
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 20px;
+            }
+
+            .admin-title {
+                font-size: 24px;
+            }
+
+            .password-input {
+                width: 45px;
+                height: 55px;
+                font-size: 20px;
+            }
+
+            .wish-item {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1 class="admin-title">🔐 Quản Lý Lời Chúc</h1>
+        
+        <!-- Form nhập mật khẩu -->
+        <div class="password-form" id="passwordForm">
+            <div class="password-input-group">
+                <input type="text" class="password-input" id="pwd1" maxlength="1" pattern="[0-9]">
+                <input type="text" class="password-input" id="pwd2" maxlength="1" pattern="[0-9]">
+                <input type="text" class="password-input" id="pwd3" maxlength="1" pattern="[0-9]">
+                <input type="text" class="password-input" id="pwd4" maxlength="1" pattern="[0-9]">
+                <input type="text" class="password-input" id="pwd5" maxlength="1" pattern="[0-9]">
+                <input type="text" class="password-input" id="pwd6" maxlength="1" pattern="[0-9]">
+            </div>
+            <button class="password-submit-btn" id="passwordSubmitBtn">Xác Nhận</button>
+            <div class="password-error" id="passwordError">Mật khẩu không đúng!</div>
+        </div>
+
+        <!-- Nội dung quản lý -->
+        <div class="admin-content" id="adminContent">
+            <div class="wishes-header">
+                <div class="wishes-count" id="wishesCount">Đang tải...</div>
+                <button class="refresh-btn" id="refreshBtn">🔄 Làm mới</button>
+            </div>
+            
+            <div class="wishes-list" id="wishesList">
+                <div class="loading">Đang tải dữ liệu...</div>
+            </div>
+            
+            <button class="logout-btn" id="logoutBtn">Đăng xuất</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+    
+    <script>
+        // Firebase Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlK6wJrOHVMYK1rHad2PiSj-X-GJYZjEI",
+            authDomain: "birthdayinvi-cc08f.firebaseapp.com",
+            databaseURL: "https://birthdayinvi-cc08f-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "birthdayinvi-cc08f",
+            storageBucket: "birthdayinvi-cc08f.firebasestorage.app",
+            messagingSenderId: "111670688222",
+            appId: "1:111670688222:web:89a90a8f2a2d9c0465054f",
+            measurementId: "G-LPY8B5FY1B"
+        };
+
+        // Mật khẩu admin (6 số)
+        const ADMIN_PASSWORD = "123456"; // Thay đổi mật khẩu này
+
+        // Khởi tạo Firebase
+        let database = null;
+        if (typeof firebase !== 'undefined') {
+            firebase.initializeApp(firebaseConfig);
+            database = firebase.database();
+        }
+
+        // DOM Elements
+        const passwordForm = document.getElementById('passwordForm');
+        const adminContent = document.getElementById('adminContent');
+        const passwordInputs = [
+            document.getElementById('pwd1'),
+            document.getElementById('pwd2'),
+            document.getElementById('pwd3'),
+            document.getElementById('pwd4'),
+            document.getElementById('pwd5'),
+            document.getElementById('pwd6')
+        ];
+        const passwordSubmitBtn = document.getElementById('passwordSubmitBtn');
+        const passwordError = document.getElementById('passwordError');
+        const wishesList = document.getElementById('wishesList');
+        const wishesCount = document.getElementById('wishesCount');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Kiểm tra đã đăng nhập chưa
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            passwordForm.style.display = 'none';
+            adminContent.classList.add('active');
+            loadWishes();
+        }
+
+        // Xử lý nhập mật khẩu
+        passwordInputs.forEach((input, index) => {
+            input.addEventListener('input', function(e) {
+                // Chỉ cho phép số
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                // Tự động chuyển sang ô tiếp theo
+                if (this.value && index < passwordInputs.length - 1) {
+                    passwordInputs[index + 1].focus();
+                }
+            });
+
+            input.addEventListener('keydown', function(e) {
+                // Xóa và chuyển về ô trước khi nhấn Backspace
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    passwordInputs[index - 1].focus();
+                }
+            });
+        });
+
+        // Xử lý submit mật khẩu
+        passwordSubmitBtn.addEventListener('click', function() {
+            const password = passwordInputs.map(input => input.value).join('');
+            
+            if (password.length !== 6) {
+                showPasswordError();
+                return;
+            }
+
+            if (password === ADMIN_PASSWORD) {
+                // Đăng nhập thành công
+                sessionStorage.setItem('adminLoggedIn', 'true');
+                passwordForm.style.display = 'none';
+                adminContent.classList.add('active');
+                loadWishes();
+            } else {
+                showPasswordError();
+                // Xóa mật khẩu
+                passwordInputs.forEach(input => input.value = '');
+                passwordInputs[0].focus();
+            }
+        });
+
+        // Enter để submit
+        passwordInputs[5].addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                passwordSubmitBtn.click();
+            }
+        });
+
+        function showPasswordError() {
+            passwordError.style.display = 'block';
+            setTimeout(() => {
+                passwordError.style.display = 'none';
+            }, 3000);
+        }
+
+        // Load danh sách lời chúc
+        function loadWishes() {
+            if (!database) {
+                wishesList.innerHTML = '<div class="empty-state">Lỗi: Không thể kết nối Firebase</div>';
+                return;
+            }
+
+            wishesList.innerHTML = '<div class="loading">Đang tải dữ liệu...</div>';
+
+            const wishesRef = database.ref('wishes');
+            wishesRef.orderByChild('timestamp').once('value')
+                .then((snapshot) => {
+                    const wishes = [];
+                    snapshot.forEach((childSnapshot) => {
+                        wishes.push({
+                            id: childSnapshot.key,
+                            ...childSnapshot.val()
+                        });
+                    });
+
+                    // Sắp xếp theo thời gian mới nhất
+                    wishes.reverse();
+
+                    displayWishes(wishes);
+                })
+                .catch((error) => {
+                    console.error('Lỗi khi tải lời chúc:', error);
+                    wishesList.innerHTML = '<div class="empty-state">Lỗi khi tải dữ liệu. Vui lòng thử lại!</div>';
+                });
+        }
+
+        // Hiển thị danh sách lời chúc
+        function displayWishes(wishes) {
+            wishesCount.textContent = `Tổng số: ${wishes.length} lời chúc`;
+
+            if (wishes.length === 0) {
+                wishesList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📭</div>
+                        <p>Chưa có lời chúc nào</p>
+                    </div>
+                `;
+                return;
+            }
+
+            wishesList.innerHTML = wishes.map(wish => {
+                const date = wish.date ? new Date(wish.date).toLocaleString('vi-VN') : 'Không rõ';
+                const guestName = wish.guestName || 'Khách';
+                const name = wish.name || 'Ẩn danh';
+                const message = wish.message || '';
+
+                return `
+                    <div class="wish-item">
+                        <div class="wish-header">
+                            <div>
+                                <div class="wish-name">${escapeHtml(name)}</div>
+                                <div class="wish-guest">Khách mời: ${escapeHtml(guestName)}</div>
+                            </div>
+                        </div>
+                        <div class="wish-message">${escapeHtml(message)}</div>
+                        <div class="wish-date">📅 ${date}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Escape HTML để tránh XSS
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Làm mới danh sách
+        refreshBtn.addEventListener('click', function() {
+            loadWishes();
+        });
+
+        // Đăng xuất
+        logoutBtn.addEventListener('click', function() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                sessionStorage.removeItem('adminLoggedIn');
+                passwordForm.style.display = 'block';
+                adminContent.classList.remove('active');
+                passwordInputs.forEach(input => input.value = '');
+                passwordInputs[0].focus();
+            }
+        });
+
+        // Auto focus vào ô đầu tiên
+        passwordInputs[0].focus();
+    </script>
+</body>
+</html>
+
