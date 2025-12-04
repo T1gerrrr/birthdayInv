@@ -4,8 +4,20 @@ let isMusicPlaying = false;
 let shouldAutoPlay = false; // Flag để tự động phát khi player ready
 let isPlayerReady = false; // Flag để biết player đã sẵn sàng chưa
 let retryCount = 0; // Đếm số lần retry
+let youtubeAPILoaded = false; // Flag để biết YouTube API đã load chưa
 const MAX_RETRY = 5; // Số lần retry tối đa
 const YOUTUBE_VIDEO_ID = 'jq2pn8b6q-A'; // ID từ link: https://www.youtube.com/watch?v=jq2pn8b6q-A
+
+// Hàm load YouTube API khi user tương tác
+function loadYouTubeAPI() {
+    if (youtubeAPILoaded) return;
+    
+    youtubeAPILoaded = true;
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    script.async = true;
+    document.head.appendChild(script);
+}
 
 // Hàm khởi tạo YouTube Player khi API sẵn sàng
 // Phải là global function để YouTube API có thể gọi
@@ -16,7 +28,7 @@ window.onYouTubeIframeAPIReady = function() {
             width: '0',
             videoId: YOUTUBE_VIDEO_ID,
             playerVars: {
-                'autoplay': 1, // Bật autoplay
+                'autoplay': 0, // Tắt autoplay để tránh Zalo preview
                 'controls': 0,
                 'disablekb': 1,
                 'enablejsapi': 1,
@@ -242,6 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Xử lý click vào hình shin_c
     shinCImage.addEventListener('click', function() {
+        // Load YouTube API khi user tương tác lần đầu (tránh Zalo preview)
+        loadYouTubeAPI();
+        
         // Ẩn hình shin_c
         shinCContainer.style.display = 'none';
         // Hiện envelope trực tiếp

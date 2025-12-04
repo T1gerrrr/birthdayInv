@@ -427,9 +427,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #5a3d5c;
     font-size: 18px;
     font-weight: bold;
+    font-family: "Imperial Script", cursive;
     text-align: center;
     z-index: 10;
     padding: 10px 18px;
@@ -444,6 +444,14 @@ body {
     opacity: 0;
     transition: opacity 0.5s ease-in 0.5s;
     border: 2px solid rgba(255, 107, 157, 0.3);
+    
+    /* 🌈 CHỮ GRADIENT ĐỎ → HỒNG */
+    background: linear-gradient(90deg, #a81919, #ff648b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
+    
 }
 
 .envelope-container.opened .envelope-name {
@@ -584,6 +592,7 @@ body {
     font-size: 20px;
     animation: heartbeat 3.5s ease-in-out infinite;
     z-index: 4;
+    
 }
 
 .envelope-flap.opened .envelope-heart {
@@ -633,6 +642,7 @@ body {
     color: #5a3d5c;
     font-size: 24px;
     font-weight: bold;
+    font-family: "Imperial Script", cursive;
     text-align: center;
     z-index: 100;
     padding: 12px 24px;
@@ -666,9 +676,9 @@ body {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: #5a3d5c;
     font-size: 22px;
     font-weight: bold;
+    font-family: "Imperial Script", cursive;
     text-align: center;
     z-index: 100;
     padding: 12px 24px;
@@ -683,6 +693,14 @@ body {
     border: 2px solid rgba(255, 107, 157, 0.4);
     display: none;
     animation: fadeInDown 0.8s ease-out 0.3s both;
+    letter-spacing: 3px;
+    
+ 
+    background: linear-gradient(90deg, #a81919, #ff648b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    
 }
 
 .shin-c-image {
